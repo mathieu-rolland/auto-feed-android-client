@@ -10,7 +10,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CameraButtonEventListener( var cameraState : String , var operations : BoxOperations ) : View.OnClickListener {
+class CameraButtonEventListener( var cameraState : String , var operations : BoxOperations , var cameraViewChange: CameraViewChange ) : View.OnClickListener {
 
     override fun onClick(p0: View?) {
 
@@ -22,6 +22,7 @@ class CameraButtonEventListener( var cameraState : String , var operations : Box
 
                 override fun onResponse(call: Call<BoxState>, response: Response<BoxState>) {
                     updateCameraState( response.body()?.camera!! );
+                    cameraViewChange.stopTheCameraStream()
                 }
             })
         }else if ( "STOPPED".equals( cameraState ) ){
@@ -31,7 +32,8 @@ class CameraButtonEventListener( var cameraState : String , var operations : Box
                 }
 
                 override fun onResponse(call: Call<BoxState>, response: Response<BoxState>) {
-                    updateCameraState( response.body()?.camera!! );
+                    updateCameraState( response.body()?.camera!! )
+                    cameraViewChange.openTheCameraStream()
                 }
             })
         }
