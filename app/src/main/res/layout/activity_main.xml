@@ -9,11 +9,11 @@
         tools:layout_editor_absoluteY="16dp"
         tools:layout_editor_absoluteX="16dp">
 
-    <ProgressBar android:layout_width="match_parent"
+    <!--<ProgressBar android:layout_width="match_parent"
                  android:layout_height="match_parent"
                  tools:layout_editor_absoluteY="0dp"
                  tools:layout_editor_absoluteX="0dp"
-                 android:id="@+id/loader" />
+                 android:id="@+id/loader" />-->
 
     <Switch android:layout_width="257dp"
             android:layout_height="47dp"
