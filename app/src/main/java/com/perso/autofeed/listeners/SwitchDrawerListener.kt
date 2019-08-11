@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.View
 import android.widget.CompoundButton
 import com.perso.autofeed.retrofit.client.BoxOperations
+import com.perso.data.model.model.BoxResponse
 import com.perso.data.model.model.BoxState
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,27 +16,34 @@ class SwitchDrawerListener( val operations: BoxOperations , val number: Int , va
         Log.e( "MRO" , "On checkedChanged " + number )
         if( isActivated ){
 
-            operations.openTheDrawer( number ).enqueue( object : Callback<BoxState> {
-                override fun onFailure(call: Call<BoxState>, t: Throwable) {
+            operations.openTheDrawer( number ).enqueue( object : Callback<BoxResponse> {
+                override fun onFailure(call: Call<BoxResponse>, t: Throwable) {
                     Log.e( "MRO" , "An error occured when openning the drawer " + number )
                 }
 
-                override fun onResponse(call: Call<BoxState>, response: Response<BoxState>) {
+                override fun onResponse(call: Call<BoxResponse>, response: Response<BoxResponse>) {
                     drawerOpening()
+                    Log.d("MRO" , "Response : " + response.body() )
+                    if( response.body()?.errorDescription != null ){
+                        drawerStateChange.displayMessage( response.body()?.errorDescription?.errorMessage!! )
+                    }
                 }
 
             })
 
         }else{
 
-            operations.closeTheDrawer( number ).enqueue( object : Callback<BoxState> {
-                override fun onFailure(call: Call<BoxState>, t: Throwable) {
+            operations.closeTheDrawer( number ).enqueue( object : Callback<BoxResponse> {
+                override fun onFailure(call: Call<BoxResponse>, t: Throwable) {
                     Log.e( "MRO" , "An error occured when closing the drawer " + number )
                 }
 
-                override fun onResponse(call: Call<BoxState>, response: Response<BoxState>) {
+                override fun onResponse(call: Call<BoxResponse>, response: Response<BoxResponse>) {
                     Log.d("MRO" , "Response : " + response.body())
                     drawerClosing()
+                    if( response.body()?.errorDescription != null ){
+                        drawerStateChange.displayMessage( response.body()?.errorDescription?.errorMessage!! )
+                    }
                 }
 
             })
