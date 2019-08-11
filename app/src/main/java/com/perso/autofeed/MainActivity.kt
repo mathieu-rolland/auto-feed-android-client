@@ -39,6 +39,10 @@ class MainActivity : AppCompatActivity(),
         drawer1.setOnCheckedChangeListener( SwitchDrawerListener( retroFitClient.create( BoxOperations::class.java ) , 1 ,this ) )
         drawer2.setOnCheckedChangeListener( SwitchDrawerListener( retroFitClient.create( BoxOperations::class.java ) , 2 ,this ) )
 
+
+        val soundButton = findViewById<ImageView>(R.id.play_sound_button)
+        soundButton.setOnClickListener( PlaySoundListener( retroFitClient.create( BoxOperations::class.java ) , this)  )
+
         var operations = retroFitClient.create( BoxOperations::class.java )
 
         operations.getBoxState().enqueue( object : Callback<BoxResponse> {

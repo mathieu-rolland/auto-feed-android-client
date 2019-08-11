@@ -26,4 +26,7 @@ interface BoxOperations {
     @GET( "/camera/stop" )
     fun stopStreamin() : Call<BoxResponse>
 
+    @GET("/box/sound/play")
+    fun playSound() : Call<String>
+
 }
