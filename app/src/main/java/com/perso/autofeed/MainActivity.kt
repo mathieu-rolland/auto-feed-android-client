@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity(),
     override fun openTheCameraStream() {
         val cameraView = findViewById<WebView>(R.id.cameraView)
         cameraView.visibility = View.VISIBLE
-        cameraView.loadUrl("https://consomac.fr/")
+        cameraView.loadUrl("http://auto-feed:8091/?action=stream")
         val cameraButton = findViewById<ImageButton>(R.id.cameraButton)
         cameraButton.setImageDrawable( ContextCompat.getDrawable( applicationContext , R.mipmap.camera_running ) )
     }

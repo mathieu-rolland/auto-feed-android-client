@@ -8,7 +8,7 @@ class RetroFitClient() {
 
     //private val client = OkHttpClient()
     companion object {
-        const val BASE_URL_LOCAL = "http://MBP-de-Mathieu:8080"
+        const val BASE_URL_LOCAL = "http://auto-feed:8080"
     }
 
     var client: Retrofit
